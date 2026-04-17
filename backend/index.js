@@ -10,9 +10,18 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
 
+const { Pool, neonConfig } = require('@neondatabase/serverless');
+const { PrismaNeon } = require('@prisma/adapter-neon');
+const ws = require('ws');
+
+// Configuración necesaria para que Neon funcione en Node.js
+neonConfig.webSocketConstructor = ws;
+
 // 1. Conexión a Base de Datos (Neon + Prisma)
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const adapter = new PrismaPg(pool);
+
+// Inicializamos el cliente con el adaptador
 const prisma = new PrismaClient({ adapter });
 
 // 2. Inicializar Servidor Express
