@@ -21,14 +21,42 @@ const io = new Server(server, {
 });
 
 // 3. Conexión a Base de Datos
-console.log("=== DEBUG RENDER ENTORNO ===");
-console.log("DATABASE_URL:", process.env.DATABASE_URL ? "Detectada ✅" : "UNDEFINED ❌");
-console.log("CLOUDINARY_API_KEY:", process.env.CLOUDINARY_API_KEY ? "Detectada ✅" : "UNDEFINED ❌");
-console.log("============================");
-
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const adapter = new PrismaNeon(pool);
 const prisma = new PrismaClient({ adapter });
+
+async function verificarYConectarBD() {
+  console.log("=== ESTADO DEL ENTORNO Y CONEXIÓN ===");
+  
+  // 1. Verificar variables de entorno
+  console.log("DATABASE_URL:", process.env.DATABASE_URL ? "Detectada ✅" : "UNDEFINED ❌");
+  console.log("CLOUDINARY_API_KEY:", process.env.CLOUDINARY_API_KEY ? "Detectada ✅" : "UNDEFINED ❌");
+  console.log("-------------------------------------");
+
+  // 2. Intentar la conexión si la variable existe
+  if (!process.env.DATABASE_URL) {
+    console.error("❌ ERROR CRÍTICO: No se intentará conectar porque no hay DATABASE_URL.");
+    console.log("=====================================");
+    return;
+  }
+
+  try {
+    console.log("⏳ Intentando conectar a la base de datos...");
+    
+    // Forzamos a Prisma a establecer la conexión
+    await prisma.$connect(); 
+    
+    console.log("🎉 ¡CONEXIÓN EXITOSA! La base de datos está conectada y lista.");
+  } catch (error) {
+    console.error("❌ FALLÓ LA CONEXIÓN A LA BASE DE DATOS.");
+    console.error("Motivo exacto del rechazo:", error.message);
+  }
+  
+  console.log("=====================================");
+}
+
+// Ejecutamos la función inmediatamente
+verificarYConectarBD();
 
 // 4. Middlewares
 app.use(cors());
