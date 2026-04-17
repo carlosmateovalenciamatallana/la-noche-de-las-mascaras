@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // Recuerda que la URL ahora vive en prisma.config.ts
+}
+
+model User {
+  id             String    @id @default(uuid())
+  deviceId       String    @unique // Para identificar al usuario sin login complejo
+  profiles       Profile[] // Relación 1 a Muchos: Un usuario puede tener perfil falso y real
+  likesGiven     Like[]
+  commentsGiven  Comment[]
+  createdAt      DateTime  @default(now())
+}
+
+model Profile {
+  id            String    @id @default(uuid())
+  isReal        Boolean   @default(false) // false = Fase 1, true = Fase 2
+  photoUrl      String
+  name          String
+  bio           String
+  quoteAssigned String? 
+  userId        String    // ¡Eliminamos el @unique para permitir Fase 1 y Fase 2!
+  
+  // Relación simplificada
+  user          User      @relation(fields: [userId], references: [id])
+  likes         Like[]
+  comments      Comment[]
+  createdAt     DateTime  @default(now())
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  profileId String
+  userId    String
+  profile   Profile  @relation(fields: [profileId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  @@unique([profileId, userId]) // Un like por usuario por perfil
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  text      String
+  profileId String
+  userId    String
+  profile   Profile  @relation(fields: [profileId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model AppConfig {
+  id        Int      @id @default(1)
+  secretPin String   @default("250426")
+}
+
+model Quote {
+  id   Int    @id @default(autoincrement())
+  text String
+}

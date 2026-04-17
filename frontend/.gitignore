@@ -1,0 +1,14 @@
+# Dependencias
+node_modules/
+
+# Archivos de producción (El código empaquetado)
+dist/
+dist-ssr/
+
+# Variables de entorno secretas
+.env
+.env.local
+.env.*
+
+# Basura del sistema
+.DS_Store

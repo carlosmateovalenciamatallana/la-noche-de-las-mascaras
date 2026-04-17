@@ -1,0 +1,13 @@
+# Dependencias
+node_modules/
+
+# Variables de entorno secretas (¡Tus contraseñas de Base de Datos!)
+.env
+
+# Logs y reportes de errores de Node
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Basura del sistema
+.DS_Store

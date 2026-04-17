@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    /* bg-dark se refiere al color #0f0f0f definido en tu tailwind.config.js */
+    @apply bg-dark text-white font-sans antialiased overflow-x-hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Capa de utilidades personalizadas para el efecto de giro 3D */
+@layer utilities {
+  /* Define la profundidad de la escena 3D */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  /* Permite que los hijos se posicionen en el espacio 3D */
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* Oculta la cara trasera de un elemento al girar */
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden; /* Soporte para Safari */
+  }
+
+  /* Clase que activa el giro de 180 grados */
+  .flipped {
+    transform: rotateY(180deg);
+  }
+
+  /* Utilidad extra por si necesitas girar algo individualmente */
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Opcional: Suavizado de scroll para la galería */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilización de la barra de scroll para mantener la estética oscura */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 10px;
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer utilities {
+  .animate-progress {
+    animation: progress 2s linear forwards;
+  }
+
+  @keyframes progress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+
+  /* Animación de entrada suave para el overlay */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+}
