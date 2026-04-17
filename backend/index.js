@@ -3,6 +3,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const ws = require('ws');
+const cloudinary = require('cloudinary').v2; // <--- ¡AÑADE ESTA LÍNEA!
 const { Pool, neonConfig } = require('@neondatabase/serverless');
 const { PrismaNeon } = require('@prisma/adapter-neon');
 const { PrismaClient } = require('@prisma/client');
