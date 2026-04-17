@@ -46,7 +46,7 @@ export default function RegisterReal() {
 
     try {
       // 1. Petición al backend
-      const response = await axios.post('http://192.168.1.5:3001/api/profiles/real', data, {
+      const response = await axios.post('https://la-noche-de-las-mascaras.onrender.com/api/profiles/real', data, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       

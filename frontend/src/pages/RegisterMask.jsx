@@ -45,7 +45,7 @@ export default function RegisterMask() {
 
     try {
       // 1. Petición al backend
-      await axios.post('http://192.168.1.5:3001/api/profiles/mask', data, {
+      await axios.post('https://la-noche-de-las-mascaras.onrender.com/api/profiles/mask', data, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
       
