@@ -1,39 +1,28 @@
-require('dotenv').config();
 const express = require('express');
 const http = require('http');
-const cors = require('cors');
 const { Server } = require('socket.io');
-const { PrismaClient } = require('@prisma/client');
-const { PrismaPg } = require('@prisma/adapter-pg');
-const { Pool } = require('pg');
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const multer = require('multer');
-
+const cors = require('cors');
+const ws = require('ws');
 const { Pool, neonConfig } = require('@neondatabase/serverless');
 const { PrismaNeon } = require('@prisma/adapter-neon');
-const ws = require('ws');
+const { PrismaClient } = require('@prisma/client');
 
-// Configuración necesaria para que Neon funcione en Node.js
+// 1. Configuración de Neon
 neonConfig.webSocketConstructor = ws;
 
-// 1. Conexión a Base de Datos (Neon + Prisma)
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const adapter = new PrismaPg(pool);
-
-// Inicializamos el cliente con el adaptador
-const prisma = new PrismaClient({ adapter });
-
-// 2. Inicializar Servidor Express
+// 2. Inicialización de la App
 const app = express();
 const server = http.createServer(app);
-
-// 3. Configurar Socket.io (Tiempo Real)
 const io = new Server(server, {
-  cors: { origin: '*', methods: ['GET', 'POST'] }
+  cors: { origin: "*" }
 });
 
-// 4. Middlewares básicos
+// 3. Conexión a Base de Datos
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const adapter = new PrismaNeon(pool);
+const prisma = new PrismaClient({ adapter });
+
+// 4. Middlewares
 app.use(cors());
 app.use(express.json());
 
