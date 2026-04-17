@@ -5,56 +5,46 @@ const cors = require('cors');
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const { PrismaClient } = require('@prisma/client'); // Solo necesitamos Prisma nativo
+const { Pool } = require('@neondatabase/serverless');
+const { PrismaNeon } = require('@prisma/adapter-neon');
+const { PrismaClient } = require('@prisma/client');
 
 // 1. Inicialización de la App
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server, {
-  cors: { origin: "*" }
-});
+const io = new Server(server, { cors: { origin: "*" } });
 
-// 2. Conexión a Base de Datos (Nativa y Estable)
-// Prisma automáticamente leerá process.env.DATABASE_URL
-const prisma = new PrismaClient(); 
+// 2. Conexión a Base de Datos (Al estilo Prisma v7)
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const adapter = new PrismaNeon(pool);
+const prisma = new PrismaClient({ adapter });
 
 async function verificarYConectarBD() {
   console.log("=== ESTADO DEL ENTORNO Y CONEXIÓN ===");
-  
-  // Verificar variables de entorno
   console.log("DATABASE_URL:", process.env.DATABASE_URL ? "Detectada ✅" : "UNDEFINED ❌");
-  console.log("CLOUDINARY_API_KEY:", process.env.CLOUDINARY_API_KEY ? "Detectada ✅" : "UNDEFINED ❌");
   console.log("-------------------------------------");
 
   if (!process.env.DATABASE_URL) {
-    console.error("❌ ERROR CRÍTICO: No se intentará conectar porque no hay DATABASE_URL.");
-    console.log("=====================================");
+    console.error("❌ ERROR CRÍTICO: No hay DATABASE_URL.");
     return;
   }
 
   try {
-    console.log("⏳ Intentando conectar a la base de datos (Modo Nativo)...");
-    
-    // Forzamos a Prisma a establecer la conexión tcp
+    console.log("⏳ Conectando a Neon Serverless...");
     await prisma.$connect(); 
-    
-    console.log("🎉 ¡CONEXIÓN EXITOSA! La base de datos está conectada de forma estable.");
+    console.log("🎉 ¡CONEXIÓN EXITOSA! Base de datos lista.");
   } catch (error) {
-    console.error("❌ FALLÓ LA CONEXIÓN A LA BASE DE DATOS.");
-    console.error("Motivo exacto del rechazo:", error.message);
+    console.error("❌ FALLÓ LA CONEXIÓN:", error.message);
   }
-  
-  console.log("=====================================");
 }
 
-// Ejecutamos la función inmediatamente
 verificarYConectarBD();
 
 // 3. Middlewares
 app.use(cors());
 app.use(express.json());
 
-// 4. Configurar Cloudinary para guardar las fotos
+// 4. Configurar Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -71,17 +61,17 @@ const storage = new CloudinaryStorage({
 });
 const upload = multer({ storage: storage });
 
-// 5. Conectar las rutas
+// 5. Rutas
 const apiRoutes = require('./routes/api')(prisma, io, upload);
 app.use('/api', apiRoutes);
 
-// 6. Eventos de WebSockets
+// 6. WebSockets de la App
 io.on('connection', (socket) => {
   console.log(`📱 Usuario conectado: ${socket.id}`);
   socket.on('disconnect', () => console.log('❌ Usuario desconectado'));
 });
 
-// 7. Encender el servidor
+// 7. Encender Servidor
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(`
