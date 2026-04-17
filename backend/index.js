@@ -21,6 +21,11 @@ const io = new Server(server, {
 });
 
 // 3. Conexión a Base de Datos
+console.log("=== DEBUG RENDER ENTORNO ===");
+console.log("DATABASE_URL:", process.env.DATABASE_URL ? "Detectada ✅" : "UNDEFINED ❌");
+console.log("CLOUDINARY_API_KEY:", process.env.CLOUDINARY_API_KEY ? "Detectada ✅" : "UNDEFINED ❌");
+console.log("============================");
+
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 const adapter = new PrismaNeon(pool);
 const prisma = new PrismaClient({ adapter });
