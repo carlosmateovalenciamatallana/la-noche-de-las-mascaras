@@ -15,7 +15,17 @@ const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
 // 2. Conexión a Base de Datos (Al estilo Prisma v7)
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+//const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+  throw new Error("❌ CRÍTICO: La variable DATABASE_URL no llegó al servidor de Render. Revisa la pestaña Environment.");
+}
+
+const pool = new Pool({ connectionString });
+
+
 const adapter = new PrismaNeon(pool);
 const prisma = new PrismaClient({ adapter });
 
