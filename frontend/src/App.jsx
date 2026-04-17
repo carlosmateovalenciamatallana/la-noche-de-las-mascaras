@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import Welcome from './pages/Welcome';
+import Welcome from './pages/welcome';
 import RegisterMask from './pages/RegisterMask';
 import Feed from './pages/Feed';
 import RegisterReal from './pages/RegisterReal';
