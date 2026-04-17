@@ -21,7 +21,7 @@ export default function Feed() {
   useEffect(() => {
     const fetchFeed = async () => {
       try {
-        const response = await axios.get('https://la-noche-de-las-mascaras.onrender.com/api/feed');
+        const response = await axios.get('https://la-noche-de-las-mascaras.onrender.comapi/feed');
         setProfiles(response.data);
       } catch (error) { console.error(error); }
     };
@@ -62,7 +62,7 @@ export default function Feed() {
   const handleLike = async (targetId) => {
     try {
       const deviceId = localStorage.getItem('deviceId');
-      await axios.post('https://la-noche-de-las-mascaras.onrender.com/api/likes', { profileId: targetId, userId: deviceId });
+      await axios.post('https://la-noche-de-las-mascaras.onrender.comapi/likes', { profileId: targetId, userId: deviceId });
     } catch (error) { console.log('Error al dar like'); }
   };
 
@@ -71,7 +71,7 @@ export default function Feed() {
     if (!commentText.trim()) return;
     try {
       const deviceId = localStorage.getItem('deviceId');
-      await axios.post('https://la-noche-de-las-mascaras.onrender.com/api/comments', { 
+      await axios.post('https://la-noche-de-las-mascaras.onrender.comapi/comments', { 
         profileId: selectedProfile.id, userId: deviceId, text: commentText 
       });
       setCommentText('');
@@ -88,7 +88,7 @@ export default function Feed() {
   const handlePinSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://la-noche-de-las-mascaras.onrender.com/api/validate-pin', { pin: pinInput });
+      await axios.post('https://la-noche-de-las-mascaras.onrender.comapi/validate-pin', { pin: pinInput });
       setShowPinModal(false);
       navigate('/register-real'); 
     } catch (error) {
