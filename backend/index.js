@@ -5,8 +5,10 @@ const cors = require('cors');
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const { Pool } = require('@neondatabase/serverless');
-const { PrismaNeon } = require('@prisma/adapter-neon');
+
+// 🚨 CAMBIO IMPORTANTE 1: Usamos 'pg' en lugar de 'serverless'
+const { Pool } = require('pg');
+const { PrismaPg } = require('@prisma/adapter-pg');
 const { PrismaClient } = require('@prisma/client');
 
 // 1. Inicialización de la App
@@ -14,19 +16,17 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 
-// 2. Conexión a Base de Datos (Al estilo Prisma v7)
-//const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-
+// 2. Conexión a Base de Datos (Con driver nativo para servidores fijos)
 const connectionString = process.env.DATABASE_URL;
 
 if (!connectionString) {
-  throw new Error("❌ CRÍTICO: La variable DATABASE_URL no llegó al servidor de Render. Revisa la pestaña Environment.");
+  throw new Error("❌ CRÍTICO: La variable DATABASE_URL no llegó al servidor de Koyeb. Revisa la pestaña de variables de entorno.");
 }
 
 const pool = new Pool({ connectionString });
 
-
-const adapter = new PrismaNeon(pool);
+// 🚨 CAMBIO IMPORTANTE 2: Usamos PrismaPg en lugar de PrismaNeon
+const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function verificarYConectarBD() {
@@ -40,7 +40,7 @@ async function verificarYConectarBD() {
   }
 
   try {
-    console.log("⏳ Conectando a Neon Serverless...");
+    console.log("⏳ Conectando a PostgreSQL (Conexión permanente)...");
     await prisma.$connect(); 
     console.log("🎉 ¡CONEXIÓN EXITOSA! Base de datos lista.");
   } catch (error) {
