@@ -98,10 +98,10 @@ export default function RegisterMask() {
 
         {/* Inputs de Texto */}
         <div className="flex flex-col gap-1">
-          <label className="text-gold text-[10px] font-bold uppercase tracking-[0.2em]">Alias (Nombre Falso)</label>
+          <label className="text-gold text-[10px] font-bold uppercase tracking-[0.2em]">Alias</label>
           <input 
             type="text" 
-            placeholder="¿Cómo te llamas cuando te pones la máscara?"
+            placeholder="¿Cuál es tu nombre falso?"
             className="bg-transparent border-b border-gray-800 p-2 text-white focus:outline-none focus:border-gold transition-colors text-lg font-light"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
