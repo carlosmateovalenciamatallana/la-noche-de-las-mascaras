@@ -88,7 +88,7 @@ export default function RegisterReal() {
               <img src={preview} alt="Preview" className="w-full h-full object-cover" />
             ) : (
               <div className="text-center">
-                <span className="text-2xl block mb-1">🕊️</span>
+                <span className="text-2xl block mb-1">🔓</span>
                 <span className="text-white text-[10px] uppercase font-bold tracking-widest">Tu Identidad Verdadera</span>
               </div>
             )}
