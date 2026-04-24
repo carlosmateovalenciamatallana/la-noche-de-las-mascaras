@@ -11,11 +11,11 @@ export default function WelcomeReal() {
     <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-dark">
       <div className="flex-1 flex flex-col justify-center items-center w-full">
         
-        <span className="text-6xl mb-8 block drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">🕊️</span>
+        <span className="text-6xl mb-8 block drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">🔑</span>
         
         <h1 className="text-3xl font-serif font-bold text-white mb-6 tracking-wide">
-          Bienvenido a la luz,<br/>
-          <span className="text-gold">{name}</span>.
+          Bienvenido a la luz<br/>
+          <span className="text-gold">{name}</span>
         </h1>
         
         <div className="relative p-8 mt-4">
@@ -33,9 +33,9 @@ export default function WelcomeReal() {
       <div className="w-full pb-8">
         <button 
           onClick={() => navigate('/feed')}
-          className="text-gray-500 underline text-sm hover:text-white transition"
+          className="w-full bg-gold text-darker font-bold py-4 rounded-xl text-sm uppercase tracking-[0.3em] hover:bg-gold-light transition-all shadow-[0_0_25px_rgba(212,175,55,0.3)] active:scale-95"
         >
-          Volver a la galería
+         Ir a la galería
         </button>
       </div>
     </div>
