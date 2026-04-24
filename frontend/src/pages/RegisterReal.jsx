@@ -76,8 +76,8 @@ export default function RegisterReal() {
 
   return (
     <div className="flex flex-col min-h-screen p-6 bg-darker relative overflow-hidden">
-      <h2 className="text-3xl font-serif text-white mt-8 mb-2 tracking-tighter">La Revelación</h2>
-      <p className="text-gold mb-8 text-sm font-light italic">Quítate la máscara. Muéstrate como eres.</p>
+      <h2 className="text-center text-3xl font-serif text-white mt-8 mb-2 tracking-tighter">La Revelación</h2>
+      <p className="text-center text-gold mb-8 text-sm font-light italic">Quítate la máscara. ¡Muestra quien SI eres!</p>
 
       <form onSubmit={handleSubmit} className="flex-1 flex flex-col gap-8">
         
@@ -89,7 +89,7 @@ export default function RegisterReal() {
             ) : (
               <div className="text-center">
                 <span className="text-2xl block mb-1">🕊️</span>
-                <span className="text-white text-[10px] uppercase font-bold tracking-widest">Tu Rostro</span>
+                <span className="text-white text-[10px] uppercase font-bold tracking-widest">Tu Identidad Verdadera</span>
               </div>
             )}
             <input 
@@ -104,10 +104,10 @@ export default function RegisterReal() {
 
         {/* Inputs de Texto */}
         <div className="flex flex-col gap-1">
-          <label className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em]">Nombre Real</label>
+          <label className="text-gold text-[10px] font-bold uppercase tracking-[0.2em]">Nombre Real</label>
           <input 
             type="text" 
-            placeholder="Ej. Juan Pérez"
+            placeholder="Tu Nombre"
             className="bg-transparent border-b border-gray-800 p-2 text-white focus:outline-none focus:border-white transition-colors text-lg font-light"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -115,9 +115,9 @@ export default function RegisterReal() {
         </div>
 
         <div className="flex flex-col gap-1">
-          <label className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em]">Tu Esencia (Biografía)</label>
+          <label className="text-gold text-[10px] font-bold uppercase tracking-[0.2em]">Tu Verdadera Esencia</label>
           <textarea 
-            placeholder="¿Quién eres en realidad?"
+            placeholder="¿Quién eres para DIOS?"
             className="bg-transparent border-b border-gray-800 p-2 text-white focus:outline-none focus:border-white transition-colors resize-none h-24 text-lg font-light"
             value={formData.bio}
             onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
