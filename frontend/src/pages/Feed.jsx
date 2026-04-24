@@ -144,7 +144,7 @@ export default function Feed() {
 
                   <div className="flex gap-6 mt-4 pt-4 border-t border-gray-800">
                     <button onClick={() => handleLike(targetId)} className="flex items-center gap-2 text-gold/80 hover:scale-110 transition-transform">
-                      <span>🔥</span> {likesCount}
+                      <span>❤️</span> {likesCount}
                     </button>
                     <button 
                       onClick={() => { setSelectedProfile(targetProfile); setShowCommentModal(true); }}
