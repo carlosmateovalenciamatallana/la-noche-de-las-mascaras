@@ -133,7 +133,7 @@ export default function RegisterMask() {
           <div className="text-center p-8">
             <div className="text-7xl mb-6 animate-bounce">🎭</div>
             <h2 className="text-3xl font-serif text-gold mb-2 uppercase tracking-widest">Máscara Forjada</h2>
-            <p className="text-gray-500 font-light italic text-sm">Tu identidad ahora pertenece a las sombras...</p>
+            <p className="text-gray-500 font-light italic text-sm">Tu identidad ahora esta en las sombras...</p>
             
             {/* Barra de progreso decorativa */}
             <div className="mt-10 w-48 h-1 bg-gray-900 mx-auto rounded-full overflow-hidden">

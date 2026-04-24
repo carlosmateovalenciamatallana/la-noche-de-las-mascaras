@@ -161,7 +161,7 @@ export default function Feed() {
       </div>
 
       {/* Botón Flotante */}
-      {!isUserReal && (
+      {!isUserReal && !showCommentModal && (
         <div className="fixed bottom-6 left-0 right-0 mx-auto flex justify-center z-[90] pointer-events-none">
           <button 
             type="button"
