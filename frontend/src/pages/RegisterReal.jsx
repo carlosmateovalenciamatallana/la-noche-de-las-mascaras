@@ -129,7 +129,7 @@ export default function RegisterReal() {
           disabled={loading || isSuccess}
           className="mt-auto mb-8 bg-white text-black font-bold py-4 rounded-xl text-sm uppercase tracking-[0.3em] disabled:opacity-50 hover:bg-gray-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95"
         >
-          {loading ? 'Buscando la verdad...' : 'Despojarse de la máscara'}
+          {loading ? 'Buscando la verdad...' : 'Despojándose de la máscara'}
         </button>
       </form>
 
@@ -137,7 +137,7 @@ export default function RegisterReal() {
       {isSuccess && (
         <div className="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center animate-fade-in">
           <div className="text-center p-8">
-            <div className="text-7xl mb-6 animate-pulse">🕊️</div>
+            <div className="text-7xl mb-6 animate-pulse">🔓</div>
             <h2 className="text-3xl font-serif text-darker mb-2 uppercase tracking-tighter">La Verdad se revela</h2>
             <p className="text-gray-400 font-light italic text-sm">Has dejado atrás el velo de la noche...</p>
             
