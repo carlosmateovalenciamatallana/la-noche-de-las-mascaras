@@ -19,7 +19,7 @@ export default function Welcome() {
         </h1>
         
         <p className="text-gray-400 mb-8 text-lg font-light">
-          Nadie sabe quién eres. Oculta tu rostro, ¡libera tu voz!
+          Nadie sabe quién eres. ¡Oculta tu rostro!
         </p>
       </div>
 
