@@ -70,8 +70,8 @@ export default function RegisterMask() {
 
   return (
     <div className="flex flex-col min-h-screen p-6 relative bg-dark">
-      <h2 className="text-3xl font-serif text-gold mt-8 mb-2 tracking-tight">Forja tu Máscara</h2>
-      <p className="text-gray-500 mb-8 text-sm font-light italic">Crea tu identidad efímera para esta noche.</p>
+      <h2 className="text-center text-3xl font-serif text-gold mt-8 mb-2 tracking-tight">Forja tu Máscara</h2>
+      <p className="text-center text-gray-500 mb-8 text-sm font-light italic">¡Crea tu identidad efímera para esta noche!</p>
 
       <form onSubmit={handleSubmit} className="flex-1 flex flex-col gap-8">
         
@@ -101,7 +101,7 @@ export default function RegisterMask() {
           <label className="text-gold text-[10px] font-bold uppercase tracking-[0.2em]">Alias (Nombre Falso)</label>
           <input 
             type="text" 
-            placeholder="Ej. El Cuervo"
+            placeholder="¿Cómo te llamas cuando te pones la máscara?"
             className="bg-transparent border-b border-gray-800 p-2 text-white focus:outline-none focus:border-gold transition-colors text-lg font-light"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -111,7 +111,7 @@ export default function RegisterMask() {
         <div className="flex flex-col gap-1">
           <label className="text-gold text-[10px] font-bold uppercase tracking-[0.2em]">Biografía Enigmática</label>
           <textarea 
-            placeholder="¿Qué secreto escondes esta noche?"
+            placeholder="¿Quién eres para el mundo?"
             className="bg-transparent border-b border-gray-800 p-2 text-white focus:outline-none focus:border-gold transition-colors resize-none h-24 text-lg font-light"
             value={formData.bio}
             onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
