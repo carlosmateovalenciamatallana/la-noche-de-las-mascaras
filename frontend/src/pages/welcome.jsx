@@ -7,6 +7,9 @@ export default function Welcome() {
     <div className="flex flex-col items-center justify-center min-h-screen p-6 text-center">
       <div className="flex-1 flex flex-col justify-center items-center w-full">
         {/* Ícono de Máscara */}
+        <p className="text-gray-400 mb-8 text-lg font-light">
+          #NEWSEASON 2° ANIVERSARIO
+        </p>
         <div className="w-24 h-24 mb-8 bg-dark border-2 border-gold rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
           <span className="text-4xl">🎭</span>
         </div>
@@ -16,7 +19,7 @@ export default function Welcome() {
         </h1>
         
         <p className="text-gray-400 mb-8 text-lg font-light">
-          Nadie sabe quién eres. Oculta tu rostro, libera tu voz.
+          Nadie sabe quién eres. Oculta tu rostro, ¡libera tu voz!
         </p>
       </div>
 
